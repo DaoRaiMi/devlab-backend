@@ -27,6 +27,6 @@ func (u *UserRepo) GetUserByUsername(ctx context.Context, username string) (*ent
 	return nil, nil
 }
 
-func (u *UserRepo) ListUser(ctx context.Context, page, pageSize uint) ([]*entity.User, error) {
+func (u *UserRepo) ListUser(ctx context.Context, page, pageSize uint) (entity.UserList, error) {
 	return nil, nil
 }

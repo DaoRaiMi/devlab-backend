@@ -23,7 +23,6 @@ func (s *Server) login(c *gin.Context) {
 			Code:    http.StatusBadRequest,
 			Message: err.Error(),
 		})
-		return
 	}
 
 	resp, err := s.user.Login(c, req)

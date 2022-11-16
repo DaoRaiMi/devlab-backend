@@ -1,12 +1,38 @@
 package value
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 const (
+	// token expiration time
 	TokenExpirationSeconds = 86400
-	UserTokenKeyFmt        = ""
-	TokenToUserFmt         = ""
+	// max failed login count
+	MaxFailedLoginCount = 3
+	// max failed login count expiration time
+	FailedLoginCountKeyExpirationSeconds = 300
+	uidToTokenKeyFmt                     = "uid_to_token_%d"
+	tokenToUidKeyFmt                     = "token_to_uid_%s"
+	failedLoginCountKeyFmt               = "failed_login_count_%s"
 )
+
+var (
+	ErrMaxFailedLoginCountReached = errors.New("max failed login count reached")
+	ErrUsernameOrPasswordIsWrong  = errors.New("username or password is wrong")
+)
+
+func GetUidToTokenKey(id uint) string {
+	return fmt.Sprintf(uidToTokenKeyFmt, id)
+}
+
+func GetTokenToUidKey(token string) string {
+	return fmt.Sprintf(tokenToUidKeyFmt, token)
+}
+
+func GetFailedLoginCountKey(username string) string {
+	return fmt.Sprintf(failedLoginCountKeyFmt, username)
+}
 
 // login request
 type LoginRequest struct {
